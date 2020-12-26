@@ -70,7 +70,7 @@ class DefaultDropdownMenuController extends StatefulWidget {
 
   @override
   _DefaultDropdownMenuControllerState createState() =>
-      new _DefaultDropdownMenuControllerState();
+      _DefaultDropdownMenuControllerState();
 }
 
 class _DefaultDropdownMenuControllerState
@@ -81,7 +81,7 @@ class _DefaultDropdownMenuControllerState
   @override
   void initState() {
     super.initState();
-    _controller = new DropdownMenuController();
+    _controller = DropdownMenuController();
     _controller.addListener(_onController);
   }
 
@@ -114,7 +114,7 @@ class _DefaultDropdownMenuControllerState
 
   @override
   Widget build(BuildContext context) {
-    return new _DropdownMenuControllerScope(
+    return _DropdownMenuControllerScope(
       controller: _controller,
       enabled: TickerMode.of(context),
       child: widget.child,

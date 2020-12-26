@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:dropdown_menu/_src/drapdown_common.dart';
+import 'package:dropdown_menu/src/drapdown_common.dart';
 
 typedef void DropdownMenuHeadTapCallback(int index);
 
@@ -39,7 +39,7 @@ class DropdownHeader extends DropdownWidget {
 
   @override
   DropdownState<DropdownWidget> createState() {
-    return new _DropdownHeaderState();
+    return _DropdownHeaderState();
   }
 }
 
@@ -50,28 +50,26 @@ class _DropdownHeaderState extends DropdownState<DropdownHeader> {
     final Color unselectedColor = Theme.of(context).unselectedWidgetColor;
     final GetItemLabel getItemLabel = widget.getItemLabel;
 
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: new Padding(
-          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-          child: new DecoratedBox(
-              decoration: new BoxDecoration(
-                  border: new Border(left: Divider.createBorderSide(context))),
-              child: new Center(
-                  child: new Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                    new Text(
-                      getItemLabel(title),
-                      style: new TextStyle(
-                        color: selected ? primaryColor : unselectedColor,
-                      ),
-                    ),
-                    new Icon(
-                      selected ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                      color: selected ? primaryColor : unselectedColor,
-                    )
-                  ])))),
+      child: Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+          child: DecoratedBox(
+              decoration: BoxDecoration(
+                  border: Border(left: Divider.createBorderSide(context))),
+              child: Center(
+                  child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                Text(
+                  getItemLabel(title),
+                  style: TextStyle(
+                    color: selected ? primaryColor : unselectedColor,
+                  ),
+                ),
+                Icon(
+                  selected ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                  color: selected ? primaryColor : unselectedColor,
+                )
+              ])))),
       onTap: () {
         if (widget.onTap != null) {
           widget.onTap(index);
@@ -109,21 +107,21 @@ class _DropdownHeaderState extends DropdownState<DropdownHeader> {
     }
 
     list = list.map((Widget widget) {
-      return new Expanded(
+      return Expanded(
         child: widget,
       );
     }).toList();
 
-    final Decoration decoration = new BoxDecoration(
-      border: new Border(
+    final Decoration decoration = BoxDecoration(
+      border: Border(
         bottom: Divider.createBorderSide(context),
       ),
     );
 
-    return new DecoratedBox(
+    return DecoratedBox(
       decoration: decoration,
-      child: new SizedBox(
-          child: new Row(
+      child: SizedBox(
+          child: Row(
             children: list,
           ),
           height: height),

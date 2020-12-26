@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:dropdown_menu/_src/drapdown_common.dart';
+import 'package:dropdown_menu/src/drapdown_common.dart';
 
 typedef Widget MenuItemBuilder<T>(BuildContext context, T data, bool selected);
 typedef void MenuItemOnTap<T>(T data, int index);
@@ -23,7 +23,7 @@ class DropdownListMenu<T> extends DropdownWidget {
 
   @override
   DropdownState<DropdownWidget> createState() {
-    return new _MenuListState<T>();
+    return _MenuListState<T>();
   }
 }
 
@@ -40,7 +40,7 @@ class _MenuListState<T> extends DropdownState<DropdownListMenu<T>> {
     final List<T> list = widget.data;
 
     final T data = list[index];
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
       child: widget.itemBuilder(context, data, index == _selectedIndex),
       onTap: () {
@@ -55,7 +55,7 @@ class _MenuListState<T> extends DropdownState<DropdownListMenu<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView.builder(
+    return ListView.builder(
       itemExtent: widget.itemExtent,
       itemBuilder: buildItem,
       itemCount: widget.data.length,
@@ -145,7 +145,7 @@ class DropdownTreeMenu<T, E> extends DropdownWidget {
 
   @override
   DropdownState<DropdownWidget> createState() {
-    return new _TreeMenuList();
+    return _TreeMenuList();
   }
 }
 
@@ -185,7 +185,7 @@ class _TreeMenuList<T, E> extends DropdownState<DropdownTreeMenu> {
   }
 
   Widget buildSubItem(BuildContext context, int index) {
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
       child: widget.subItemBuilder(context, _subData[index],
           _activeIndex == _selectedIndex && index == _subSelectedIndex),
@@ -204,7 +204,7 @@ class _TreeMenuList<T, E> extends DropdownState<DropdownTreeMenu> {
   Widget buildItem(BuildContext context, int index) {
     final List<T> list = widget.data;
     final T data = list[index];
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
       child: widget.itemBuilder(context, data, index == _activeIndex),
       onTap: () {
@@ -220,27 +220,27 @@ class _TreeMenuList<T, E> extends DropdownState<DropdownTreeMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        new Expanded(
+        Expanded(
             flex: widget.flex,
-            child: new Container(
-              child: new ListView.builder(
+            child: Container(
+              child: ListView.builder(
                 itemExtent: widget.itemExtent,
                 itemBuilder: buildItem,
                 itemCount: this._data == null ? 0 : this._data.length,
               ),
               color: widget.background,
             )),
-        new Expanded(
+        Expanded(
             flex: widget.subFlex,
-            child: new Container(
+            child: Container(
               color: widget.subBackground,
-              child: new CustomScrollView(
+              child: CustomScrollView(
                 slivers: <Widget>[
-                  new SliverList(
-                      delegate: new SliverChildBuilderDelegate(
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate(
                     buildSubItem,
                     childCount:
                         this._subData == null ? 0 : this._subData.length,

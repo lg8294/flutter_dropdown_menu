@@ -17,7 +17,8 @@ A dropdown menu for Flutter.
 ## Installion
 
 ```
-dropdown_menu: ^1.1.0
+dropdown_menu:
+    git: https://github.com/lg8294/flutter_dropdown_menu.git
 ```
 
 ## Build simple list menu
